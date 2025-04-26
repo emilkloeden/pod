@@ -1,14 +1,12 @@
-from textual.app import App, ComposeResult
-from textual.containers import Container, Horizontal, Vertical
-from textual.css.query import NoMatches
+from textual.app import ComposeResult
+from textual.containers import Container, Horizontal
 from textual.widgets import (
-    Button, Footer, Header, Static, Tree, Label,
-    ProgressBar, Input, ContentSwitcher, TabPane, Tabs
+    Button, Static, Label, ProgressBar
 )
 
-from nowplayingbar import NowPlayingBar
-from databasemanager import PodcastDatabase
-from audioplayer import AudioPlayer
+from src.pod.services.databasemanager import PodcastDatabase
+from src.pod.services.audioplayer import AudioPlayer
+from src.pod.widgets.nowplayingbar import NowPlayingBar
 
 
 class DownloadedEpisodesList(Static):

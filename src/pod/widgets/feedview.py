@@ -1,17 +1,20 @@
-from nowplayingbar import NowPlayingBar
-from textual.app import App, ComposeResult
-from textual.containers import Container, Horizontal, Vertical
+from textual.app import  ComposeResult
+from textual.containers import Container, Horizontal
 from textual.css.query import NoMatches
 from textual.widgets import (
-    Button, Footer, Header, Static, Tree, Label,
-    ProgressBar, Input, ContentSwitcher, TabPane, Tabs
+    Button, Static, Label, ProgressBar
 )
-from audioplayer import AudioPlayer
-from feed import Feed
+
+from src.pod.models.feed import Feed
+from src.pod.services.audioplayer import AudioPlayer
+from src.pod.services.downloadmanager import DownloadManager
+from src.pod.widgets.nowplayingbar import NowPlayingBar
+
+
 class FeedView(Static):
     """View showing details of a single feed."""
 
-    def __init__(self, player: AudioPlayer, download_manager):
+    def __init__(self, player: AudioPlayer, download_manager: DownloadManager):
         super().__init__()
         self.player = player
         self.download_manager = download_manager

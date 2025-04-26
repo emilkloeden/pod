@@ -1,10 +1,10 @@
-from databasemanager import PodcastDatabase
 from textual.app import ComposeResult
-from textual.containers import Container, Horizontal, Vertical
+from textual.containers import Container
 from textual.widgets import (
-    Button, Footer, Header, Static, Tree, Label,
-    ProgressBar, Input, ContentSwitcher, TabPane, Tabs
+    Button, Static, Tree, Label
 )
+
+from src.pod.services.databasemanager import PodcastDatabase
 
 class FeedsList(Static):
     """Widget showing list of subscribed feeds."""

@@ -1,8 +1,8 @@
-import requests
+import email.utils
 import xml.etree.ElementTree as ET
 from datetime import datetime
-import email.utils
-import re
+
+import requests
 
 
 class PodcastRSSParser:

@@ -1,5 +1,24 @@
 # --------------- Main Application ---------------
 
+
+from textual.app import App, ComposeResult
+from textual.containers import Container, Horizontal, Vertical
+from textual.widgets import (
+    Button, Footer, Header, Static, Label,
+     Input, ContentSwitcher, TabPane, Tabs
+)
+from src.pod.services.databasemanager import PodcastDatabase
+from src.pod.services.audioplayer import AudioPlayer
+from src.pod.services.downloadmanager import DownloadManager
+from src.pod.services.feedupdater import FeedUpdater
+from src.pod.widgets.nowplayingbar import NowPlayingBar
+from src.pod.widgets.feedslist import FeedsList
+from src.pod.widgets.feedview import FeedView
+from src.pod.widgets.recentepisodeslist import RecentEpisodesList
+from src.pod.widgets.downloadepisodeslist import DownloadedEpisodesList
+from src.pod.widgets.addfeeddialog import AddFeedDialog
+
+
 class PodcastTUIApp(App):
     """Main Podcast TUI application."""
 
@@ -193,14 +212,13 @@ class PodcastTUIApp(App):
 
     def on_mount(self):
         """Set up app when mounted."""
-        # Connect tabs to content switcher
-        tabs = self.query_one("#main-tabs", Tabs)
+        # # Connect tabs to content switcher
+        # tabs = self.query_one("#main-tabs", Tabs)
+
+    def on_tabs_tab_activated(self, event: Tabs.TabActivated):
         switcher = self.query_one("#main-switcher", ContentSwitcher)
+        switcher.current = event.tab.id
 
-        def on_tab_changed(event):
-            switcher.current = event.tab.id
-
-        tabs.on_tabs_changed = on_tab_changed
 
     def action_toggle_play(self):
         """Toggle play/pause."""

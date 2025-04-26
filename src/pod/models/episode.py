@@ -1,8 +1,7 @@
-from typing import Optional
 from datetime import datetime
-from typing import Dict
-from typing import Any
 from pathlib import Path
+from typing import Any, Dict, Optional
+
 class Episode:
     """Represents a podcast episode."""
 

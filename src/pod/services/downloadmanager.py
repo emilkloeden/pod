@@ -1,8 +1,11 @@
 # --------------- Download Manager ---------------
-import requests
 from pathlib import Path
-from episode import Episode
-from config import DOWNLOADS_DIR
+
+import requests
+
+from src.pod.config.config import DOWNLOADS_DIR
+from src.pod.models.episode import Episode
+from src.pod.models.feed import Feed
 
 
 class DownloadManager:

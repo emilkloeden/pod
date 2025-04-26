@@ -1,7 +1,8 @@
 # --------------- Audio Player ---------------
-from episode import Episode
-
 import vlc
+
+from src.pod.models.episode import Episode
+
 
 class AudioPlayer:
     """Manages audio playback using VLC."""

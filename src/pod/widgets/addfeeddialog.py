@@ -1,12 +1,12 @@
-from textual.app import App, ComposeResult
-from textual.containers import Container, Horizontal, Vertical
+from textual.app import  ComposeResult
+from textual.containers import Container, Horizontal
 from textual.widgets import (
-    Button, Footer, Header, Static, Tree, Label,
-    ProgressBar, Input, ContentSwitcher, TabPane, Tabs
+    Button, Static, Label, Input
 )
 
-from feedslist import FeedsList
-from feedupdater import FeedUpdater
+from src.pod.services.feedupdater import FeedUpdater
+from src.pod.widgets.feedslist import FeedsList
+
 class AddFeedDialog(Static):
     """Dialog for adding a new feed."""
 

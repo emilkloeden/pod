@@ -1,11 +1,10 @@
-from textual.app import App, ComposeResult
-from textual.containers import Container, Horizontal, Vertical
-from textual.css.query import NoMatches
+from textual.app import ComposeResult
+from textual.containers import Container, Horizontal
 from textual.widgets import (
-    Button, Footer, Header, Static, Tree, Label,
-    ProgressBar, Input, ContentSwitcher, TabPane, Tabs
+    Button, Static, Label
 )
-from databasemanager import PodcastDatabase
+
+from src.pod.services.databasemanager import PodcastDatabase
 
 class RecentEpisodesList(Static):
     """Widget showing recently published episodes."""

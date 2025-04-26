@@ -1,10 +1,11 @@
 # --------------- Feed Updater ---------------
-from episode import Episode
 from datetime import datetime
-from feed import Feed
 from typing import Optional
-from rss import PodcastRSSParser
-from databasemanager import PodcastDatabase
+
+from src.pod.models.episode import Episode
+from src.pod.models.feed import Feed
+from src.pod.services.databasemanager import PodcastDatabase
+from src.pod.services.rss import PodcastRSSParser
 
 class FeedUpdater:
     """Updates podcast feeds from RSS."""

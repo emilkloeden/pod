@@ -1,9 +1,8 @@
-from typing import Dict
-from typing import Any
-from episode import Episode
-from typing import List
 from datetime import datetime
-from typing import Optional
+from typing import Any, Dict, List, Optional
+
+from src.pod.models.episode import Episode
+
 class Feed:
     """Represents a podcast feed/subscription."""
 

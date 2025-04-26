@@ -1,12 +1,13 @@
 # --------------- Database Management ---------------
-from typing import List
-from episode import Episode
-from datetime import datetime
-from typing import Optional
-from feed import Feed
 import json
 
-from config import DATABASE_FILE
+from datetime import datetime
+from typing import List, Optional
+
+from src.pod.config.config import DATABASE_FILE
+from src.pod.models.episode import Episode
+from src.pod.models.feed import Feed
+
 
 class PodcastDatabase:
     """Manages podcast feed and episode data."""

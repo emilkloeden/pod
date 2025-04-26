@@ -1,16 +1,16 @@
-from episode import Episode
-from feed import Feed
-from audioplayer import AudioPlayer
-from databasemanager import PodcastDatabase
-
 from textual.app import ComposeResult
 from textual.containers import Container, Horizontal
 from textual.css.query import NoMatches
 from textual.widgets import (
-    Button, Footer, Header, Static, Tree, Label,
-    ProgressBar, Input, TabPane, Tabs
+    Button, Static, Label, ProgressBar
 )
 from textual.reactive import reactive
+
+from src.pod.models.episode import Episode
+from src.pod.models.feed import Feed
+from src.pod.services.audioplayer import AudioPlayer
+from src.pod.services.databasemanager import PodcastDatabase
+
 
 class NowPlayingBar(Static):
     """Widget showing currently playing episode with controls."""
