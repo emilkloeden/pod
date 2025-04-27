@@ -48,12 +48,13 @@ class PodcastTUIApp(App):
     #main-content {
         row-span: 8;
         column-span: 3;
+        border: solid $accent
     }
 
     .section-title {
         text-style: bold;
         content-align: center middle;
-        height: 1;
+        height: 3;
         margin-bottom: 1;
     }
 
@@ -130,7 +131,7 @@ class PodcastTUIApp(App):
         border: thick $primary;
         padding: 1 2;
         width: 60;
-        height: 8;
+        height: 24;
         align: center middle;
     }
 
@@ -183,8 +184,8 @@ class PodcastTUIApp(App):
         yield NowPlayingBar(self.player, self.database)
 
         # Main content with tabs
-        with ContentSwitcher(id="main-switcher"):
-            with TabPane("Library", id="library-tab"):
+        with ContentSwitcher(id="main-content"):
+            with TabPane("Library", id="tab-1"):
                 with Horizontal():
                     # Left sidebar - feeds list
                     yield FeedsList(self.database)
@@ -197,7 +198,7 @@ class PodcastTUIApp(App):
                         yield RecentEpisodesList(self.database)
                         yield DownloadedEpisodesList(self.database, self.player)
 
-            with TabPane("Discover", id="discover-tab"):
+            with TabPane("Discover", id="tab-2"):
                 yield Container(
                     Label("Discover Podcasts", classes="view-title"),
                     Input(placeholder="Search for podcasts", id="search-input"),
@@ -216,7 +217,9 @@ class PodcastTUIApp(App):
         # tabs = self.query_one("#main-tabs", Tabs)
 
     def on_tabs_tab_activated(self, event: Tabs.TabActivated):
-        switcher = self.query_one("#main-switcher", ContentSwitcher)
+        switcher = self.query_one("#main-content", ContentSwitcher)
+        print(f"\n\n\n\n\n\n\n\nevent {event}")
+        # switcher.current = tab_id
         switcher.current = event.tab.id
 
 

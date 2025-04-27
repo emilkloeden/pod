@@ -41,7 +41,7 @@ class RecentEpisodesList(Static):
                 Label(episode.format_duration(), classes="episode-duration"),
                 Button("▶", classes="play-button"),
                 classes="episode-item",
-                id=f"episode-{episode.guid}"
+                id=f"episode-{episode.guid.replace('/','-').replace('.','_')}"
             )
 
             episodes_container.mount(episode_container)

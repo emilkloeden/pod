@@ -1,5 +1,5 @@
 from textual.app import ComposeResult
-from textual.containers import Container
+from textual.containers import Container, Horizontal
 from textual.widgets import (
     Button, Static, Tree, Label
 )
@@ -27,15 +27,18 @@ class FeedsList(Static):
 
     def load_feeds(self):
         """Load feeds into the tree."""
-        tree = self.query_one("#feeds-tree", Tree)
-        tree.clear()
+        # COMMENTED WHILST DEBUGGING
+        pass
 
-        root = tree.root
-        root.expand()
+        # tree = self.query_one("#feeds-tree", Tree)
+        # tree.clear()
 
-        for feed in self.database.feeds:
-            node = root.add(feed.title, {"id": feed.id, "type": "feed"})
-            # We could add episode nodes here, but let's keep it simple for now
+        # root = tree.root
+        # root.expand()
+
+        # for feed in self.database.feeds:
+        #     node = root.add(feed.title, {"id": feed.id, "type": "feed"})
+        #     # We could add episode nodes here, but let's keep it simple for now
 
     def on_tree_node_selected(self, event: Tree.NodeSelected):
         """Handle feed selection."""
@@ -43,4 +46,5 @@ class FeedsList(Static):
             node_data = event.node.data
             if node_data.get("type") == "feed":
                 feed_id = node_data.get("id")
-                self.app.show_feed(feed_id)
+                # COMMENTED WHILST DEBUGGING
+                # self.app.show_feed(feed_id)

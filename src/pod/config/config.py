@@ -8,5 +8,5 @@ DATABASE_FILE = CONFIG_DIR / "database.json"
 # Ensure directories exist
 if not CONFIG_DIR.exists():
     CONFIG_DIR.mkdir()
-if not DATABASE_FILE.exists():
+if not DOWNLOADS_DIR.exists():
     DOWNLOADS_DIR.mkdir()
