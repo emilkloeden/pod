@@ -50,14 +50,14 @@ class AddFeedDialog(Static):
         confirm_button.disabled = True
 
         # Add feed in a worker thread
-        def do_add_feed():
-            feed = self.feed_updater.add_feed_from_url(url)
-            self.call_from_thread(self._update_after_add, feed)
+        # def do_add_feed():
+        #     feed = self.feed_updater.add_feed_from_url(url)
+        #     self.call_from_thread(self._update_after_add, feed)
 
-        import threading
-        thread = threading.Thread(target=do_add_feed)
-        thread.daemon = True
-        thread.start()
+        # import threading
+        # thread = threading.Thread(target=do_add_feed)
+        # thread.daemon = True
+        # thread.start()
 
     def _update_after_add(self, feed):
         """Update UI after feed is added."""

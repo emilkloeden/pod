@@ -17,6 +17,7 @@ from src.pod.widgets.feedview import FeedView
 from src.pod.widgets.recentepisodeslist import RecentEpisodesList
 from src.pod.widgets.downloadepisodeslist import DownloadedEpisodesList
 from src.pod.widgets.addfeeddialog import AddFeedDialog
+from src.pod.widgets.discover import DiscoverView
 
 
 class PodcastTUIApp(App):
@@ -48,7 +49,8 @@ class PodcastTUIApp(App):
     #main-content {
         row-span: 8;
         column-span: 3;
-        border: solid $accent
+        border: solid green;
+
     }
 
     .section-title {
@@ -66,7 +68,6 @@ class PodcastTUIApp(App):
     }
 
     #feeds-container {
-        height: 100%;
         width: 100%;
         border: solid $accent;
     }
@@ -199,12 +200,13 @@ class PodcastTUIApp(App):
                         yield DownloadedEpisodesList(self.database, self.player)
 
             with TabPane("Discover", id="tab-2"):
-                yield Container(
-                    Label("Discover Podcasts", classes="view-title"),
-                    Input(placeholder="Search for podcasts", id="search-input"),
-                    Static(id="search-results"),
-                    id="discover-view"
-                )
+                yield DiscoverView()
+                # Container(
+                #     Label("Discover Podcasts", classes="view-title"),
+                #     Input(placeholder="Search for podcasts", id="search-input"),
+                #     Static(id="search-results"),
+                #     id="discover-view"
+                # )
 
         # Tab navigation
         yield Tabs("Library", "Discover", id="main-tabs")

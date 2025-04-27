@@ -85,7 +85,8 @@ class FeedView(Static):
                         self.player.play()
                         # Update now playing bar
                         now_playing = self.app.query_one(NowPlayingBar)
-                        now_playing.update_episode(episode, self.current_feed)
+                        if self.current_feed:
+                            now_playing.update_episode(episode, self.current_feed)
                 else:
                     # Download the episode
                     self._download_episode(episode)
@@ -107,7 +108,7 @@ class FeedView(Static):
         def do_download():
             success = self.download_manager.download_episode(episode, self.current_feed)
             # Update UI after download
-            self.call_from_thread(self._update_after_download, episode, success)
+            self.app.call_from_thread(self._update_after_download, episode, success)
 
         # Show progress indicator
         button = self.query_one(f"#play-dl-{episode.guid}", Button)

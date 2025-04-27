@@ -23,7 +23,7 @@ class Episode:
         self.guid = guid
         self.image_url = image_url
         self.downloaded = False
-        self.download_path = None
+        self.download_path: Path | None = None
         self.played = False
         self.play_position = 0  # in seconds
 

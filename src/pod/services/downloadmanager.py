@@ -16,58 +16,61 @@ class DownloadManager:
         self.database = database
         self.current_downloads = {}  # track in-progress downloads
 
-    def download_episode(self, episode: Episode, feed: Feed):
+    def download_episode(self, episode: Episode, feed: Feed | None):
         """Download an episode."""
-        # Create feed directory
-        feed_dir = self.download_dir / feed.id
-        feed_dir.mkdir(exist_ok=True)
+        if feed:
+            # Create feed directory
+            feed_dir = self.download_dir / feed.id
+            feed_dir.mkdir(exist_ok=True)
 
-        # Determine file path
-        filename = f"{episode.guid}.mp3"  # Using guid ensures uniqueness
-        filepath = feed_dir / filename
+            # Determine file path
+            filename = f"{episode.guid}.mp3"  # Using guid ensures uniqueness
+            filepath = feed_dir / filename
 
-        try:
-            # Stream download with progress tracking
-            r = requests.get(episode.audio_url, stream=True)
-            r.raise_for_status()
+            try:
+                # Stream download with progress tracking
+                r = requests.get(episode.audio_url, stream=True)
+                r.raise_for_status()
 
-            content_length = int(r.headers.get('content-length', 0))
+                content_length = int(r.headers.get('content-length', 0))
 
-            with open(filepath, 'wb') as f:
-                if content_length == 0:
-                    # No content length header
-                    f.write(r.content)
-                else:
-                    # Stream with progress
-                    dl = 0
-                    for chunk in r.iter_content(chunk_size=8192):
-                        if chunk:
-                            dl += len(chunk)
-                            f.write(chunk)
-                            # Update progress
-                            progress = (dl / content_length) * 100
-                            self.current_downloads[episode.guid] = progress
+                with open(filepath, 'wb') as f:
+                    if content_length == 0:
+                        # No content length header
+                        f.write(r.content)
+                    else:
+                        # Stream with progress
+                        dl = 0
+                        for chunk in r.iter_content(chunk_size=8192):
+                            if chunk:
+                                dl += len(chunk)
+                                f.write(chunk)
+                                # Update progress
+                                progress = (dl / content_length) * 100
+                                self.current_downloads[episode.guid] = progress
 
-            # Update episode
-            episode.downloaded = True
-            episode.download_path = filepath
+                # Update episode
+                episode.downloaded = True
+                episode.download_path = filepath
 
-            # Save database
-            if self.database:
-                self.database.save()
+                # Save database
+                if self.database:
+                    self.database.save()
 
-            # Remove from current downloads
-            if episode.guid in self.current_downloads:
-                del self.current_downloads[episode.guid]
+                # Remove from current downloads
+                if episode.guid in self.current_downloads:
+                    del self.current_downloads[episode.guid]
 
-            return True
+                return True
 
-        except Exception as e:
-            print(f"Download error: {e}")
-            # Clean up failed download
-            if filepath.exists():
-                filepath.unlink()
-            return False
+
+            except Exception as e:
+                print(f"Download error: {e}")
+                # Clean up failed download
+                if filepath.exists():
+                    filepath.unlink()
+                return False
+        return False
 
     def get_download_progress(self, episode_guid: str) -> float:
         """Get download progress percentage for an episode."""
